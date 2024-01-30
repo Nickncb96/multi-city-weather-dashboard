@@ -102,4 +102,59 @@ function getCoordinates(city) {
     todaySection.append(todayContent);
   }
   
+  // Function to render forecast for a day
+  function renderForecastDay(dayData) {
+    var date = dayjs(dayData.dt_txt).format('MMMM D, YYYY'); 
+  
+    var iconCode = dayData.weather[0].icon;
+    var temperature = isCelsius ? convertTemperatureToCelsius(dayData.main.temp) :
+      convertTemperatureToFahrenheit(dayData.main.temp);
+    var humidity = dayData.main.humidity;
+  
+    var forecastContent = $("<div>").addClass("forecast-info");
+    forecastContent.append($("<h3>").text(date));
+    forecastContent.append($("<img>").attr("src", "https://openweathermap.org/img/w/" + iconCode + ".png").attr("alt", "Weather Icon"));
+    forecastContent.append($("<p>").text("Temperature: " + temperature + (isCelsius ? "°C" : "°F")));
+    forecastContent.append($("<p>").text("Humidity: " + humidity + "%"));
+  
+    forecastSection.append(forecastContent);
+  }
+
+  
+  // unit conversion functionality
+  function convertTemperatureToCelsius(kelvin) {
+    return (kelvin - 273.15).toFixed(2);
+  }
+  
+  function convertTemperatureToFahrenheit(kelvin) {
+    return ((kelvin - 273.15) * 9 / 5 + 32).toFixed(2);
+  }
+ 
+  
+  historyList.on("click", ".list-group-item", function () {
+    var selectedCity = $(this).text();
+    getCoordinates(selectedCity);
+  });
+  
+  var lastWeatherData;  // store the last weather data
+  
+  function renderSearchHistory() {
+    // Render search history based on the saved cities in localStorage
+    var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
+    historyList.empty();
+  
+    for (var i = 0; i < savedCities.length; i++) {
+      var historyItem = $("<li>").addClass("list-group-item").text(savedCities[i]);
+      historyList.append(historyItem);
+    }
+  }
+  
+  function saveToLocalStorage(city) {
+    // Save the searched city to localStorage
+    var savedCities = JSON.parse(localStorage.getItem("cities")) || [];
+    if (!savedCities.includes(city)) {
+      savedCities.push(city);
+      localStorage.setItem("cities", JSON.stringify(savedCities));
+    }
+  }
   
