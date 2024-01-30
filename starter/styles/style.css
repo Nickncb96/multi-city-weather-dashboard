@@ -1,59 +1,86 @@
-/* reset.css */
-
-/* Apply a natural box layout model to all elements, but allowing components to change */
-html {
-    box-sizing: border-box;
-  }
-  
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-  
-  /* Reset some default styles */
-  body,
-  h1, h2, h3, h4, h5, h6,
-  p,
-  figure,
-  blockquote,
-  dl, dd, dt {
+/* Reset some default browser styles */
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li {
     margin: 0;
-  }
-  
-  ul,
-  ol {
     padding: 0;
-    list-style: none;
-  }
-  
-  /* Set core body defaults */
-  body {
-    font-family: 'Open Sans', sans-serif;
-    line-height: 1.6;
-    font-size: 16px;
-    color: #343a40;
-    background-color: #f8f9fa;
-  }
-  
-  /* Inherit fonts for inputs and buttons */
-  input,
-  button,
-  textarea,
-  select {
-    font: inherit;
-  }
-  
-  /* Normalize heading margin */
-  h1, h2, h3, h4, h5, h6 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Remove text-decoration from anchor elements */
-  a {
-    text-decoration: none;
-  }
-  
-  /* Apply a pointer cursor on interaction */
-  a:hover {
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+}
+
+.container-fluid {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.weather-header {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.weather-info {
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.forecast-info {
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.form {
+    margin-bottom: 20px;
+}
+
+.form-input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+}
+
+.search-button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-  }
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+#history {
+    list-style: none;
+}
+
+.list-group-item {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.list-group-item:hover {
+    background-color: #f0f0f0;
+}
+
+

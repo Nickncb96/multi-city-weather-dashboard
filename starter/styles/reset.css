@@ -1,0 +1,59 @@
+/* reset.css */
+
+/* Apply a natural box layout model to all elements, but allowing components to change */
+html {
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  /* Reset some default styles */
+  body,
+  h1, h2, h3, h4, h5, h6,
+  p,
+  figure,
+  blockquote,
+  dl, dd, dt {
+    margin: 0;
+  }
+  
+  ul,
+  ol {
+    padding: 0;
+    list-style: none;
+  }
+  
+  /* Set core body defaults */
+  body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+    color: #343a40;
+    background-color: #f8f9fa;
+  }
+  
+  /* Inherit fonts for inputs and buttons */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+  
+  /* Normalize heading margin */
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Remove text-decoration from anchor elements */
+  a {
+    text-decoration: none;
+  }
+  
+  /* Apply a pointer cursor on interaction */
+  a:hover {
+    cursor: pointer;
+  }
