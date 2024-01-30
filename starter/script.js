@@ -68,4 +68,38 @@ function getCoordinates(city) {
       });
   }
   
+  // Function to render weather information
+  function renderWeatherInfo(city, data) {
+    todaySection.empty();
+    forecastSection.empty();
+  
+    // Render current weather conditions
+    renderCurrentWeather(city, data.list[0]);
+  
+    // Render 5-day forecast
+    for (let i = 1; i < data.list.length; i += 8) {
+      renderForecastDay(data.list[i]);
+    }
+  }
+  
+  // Function to render current weather conditions
+  function renderCurrentWeather(city, currentData) {
+    var cityName = city;
+    var currentDate = dayjs().format('MMMM D, YYYY');
+    var iconCode = currentData.weather[0].icon;
+    var temperature = isCelsius ? convertTemperatureToCelsius(currentData.main.temp) :
+      convertTemperatureToFahrenheit(currentData.main.temp);
+    var humidity = currentData.main.humidity;
+    var windSpeed = currentData.wind.speed;
+  
+    var todayContent = $("<div>").addClass("weather-info");
+    todayContent.append($("<h2>").text(cityName + " (" + currentDate + ")"));
+    todayContent.append($("<img>").attr("src", "https://openweathermap.org/img/w/" + iconCode + ".png").attr("alt", "Weather Icon"));
+    todayContent.append($("<p>").text("Temperature: " + temperature + (isCelsius ? "°C" : "°F")));
+    todayContent.append($("<p>").text("Humidity: " + humidity + "%"));
+    todayContent.append($("<p>").text("Wind Speed: " + windSpeed + " m/s"));
+  
+    todaySection.append(todayContent);
+  }
+  
   
