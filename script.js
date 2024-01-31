@@ -29,6 +29,15 @@ searchForm.on("submit", function (event) {
   }
 });
 
+// Event listener for the search button
+$("#search-button").on("click", function () {
+  var cityName = searchInput.val().trim();
+
+  if (cityName !== "") {
+    getCoordinates(cityName);
+  }
+});
+
 // Event listener for the temperature toggle button
 $("#temperature-toggle").on("click", function () {
   isCelsius = !isCelsius; // Toggle the temperature unit flag
