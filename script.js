@@ -1,4 +1,3 @@
-// script.js
 var apiKey = "4557393f83ef3c50705313a9e5378d4e";
 // jQuery selectors for various elements
 var searchForm = $("#search-form");
@@ -9,6 +8,17 @@ var forecastSection = $("#forecast");
 // Flag for temperature unit (Celsius/Fahrenheit)
 var isCelsius = true;
 
+// Function to set default city on page load
+function setDefaultCity() {
+  var defaultCity = "London";
+  getCoordinates(defaultCity);
+}
+
+// Trigger setDefaultCity function on page load
+$(document).ready(function () {
+  setDefaultCity();
+});
+
 // Event listener for the form submission
 searchForm.on("submit", function (event) {
   event.preventDefault();
@@ -17,6 +27,12 @@ searchForm.on("submit", function (event) {
   if (cityName !== "") {
     getCoordinates(cityName);
   }
+});
+
+// Event listener for the temperature toggle button
+$("#temperature-toggle").on("click", function () {
+  isCelsius = !isCelsius; // Toggle the temperature unit flag
+  renderWeatherInfo(lastWeatherData.cityName, lastWeatherData); // Re-render weather information with the updated unit
 });
 
 // Function to get coordinates for the city
@@ -80,6 +96,12 @@ function renderWeatherInfo(city, data) {
   for (let i = 1; i < data.list.length; i += 8) {
     renderForecastDay(data.list[i]);
   }
+
+  // Store the last weather data
+  lastWeatherData = {
+    cityName: city,
+    data: data
+  };
 }
 
 // Function to render current weather conditions
@@ -104,7 +126,7 @@ function renderCurrentWeather(city, currentData) {
 
 // Function to render forecast for a day
 function renderForecastDay(dayData) {
-  var date = dayjs(dayData.dt_txt).format('MMMM D, YYYY'); 
+  var date = dayjs(dayData.dt_txt).format('MMMM D, YYYY');
 
   var iconCode = dayData.weather[0].icon;
   var temperature = isCelsius ? convertTemperatureToCelsius(dayData.main.temp) :
@@ -120,8 +142,6 @@ function renderForecastDay(dayData) {
   forecastSection.append(forecastContent);
 }
 
-// (unchanged functions)
-
 // Added unit conversion functionality
 function convertTemperatureToCelsius(kelvin) {
   return (kelvin - 273.15).toFixed(2);
@@ -131,7 +151,7 @@ function convertTemperatureToFahrenheit(kelvin) {
   return ((kelvin - 273.15) * 9 / 5 + 32).toFixed(2);
 }
 
-// (unchanged code)
+// (unchanged functions...)
 
 historyList.on("click", ".list-group-item", function () {
   var selectedCity = $(this).text();
